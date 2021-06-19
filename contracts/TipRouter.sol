@@ -9,18 +9,18 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "./AddressOracleInterface.sol";
 
 
-struct Deposit {
-    address token;
-    uint256 amount;
-    address sender;
-    address oracle;
-    string youtube_video_id;
-    address recipient;
-}
-
 
 contract TipRouter {
     using SafeERC20 for IERC20;
+
+    struct Deposit {
+        address token;
+        uint256 amount;
+        address sender;
+        address oracle;
+        string youtube_video_id;
+        address recipient;
+    }
 
     Deposit[] public deposits;
 
