@@ -45,7 +45,7 @@ contract TipRouter {
         deposits.push(dp);
     }
 
-    function resolve_all() public {
+    function resolve_all_recipient_addresses() public {
         uint arrayLength = deposits.length;
         for (uint i=0; i<arrayLength; i++) {
             AddressOracle oracle = AddressOracle(deposits[i].oracle);
@@ -53,7 +53,7 @@ contract TipRouter {
         }
     }
 
-    function release_all() public {
+    function dispatch_all_deposits() public {
         uint arrayLength = deposits.length;
         for (uint i=0; i<arrayLength; i++) {
             Deposit memory dp = deposits[i];
@@ -65,7 +65,7 @@ contract TipRouter {
         }
     }
 
-    function delete_deposits() public {
+    function delete_all_deposits() public {
         uint arrayLength = deposits.length;
         while (arrayLength > 0) {
             deposits.pop();
