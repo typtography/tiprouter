@@ -11,6 +11,10 @@ contract MockOracle is AddressOracle {
         return mock_address;
     }
 
+    function set_mock_address(address a) public {
+        mock_address = a;
+    }
+
 }
 
 
