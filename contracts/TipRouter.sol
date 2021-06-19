@@ -48,19 +48,20 @@ contract TipRouter {
     function resolve_all_recipient_addresses() public {
         uint arrayLength = deposits.length;
         for (uint i=0; i<arrayLength; i++) {
-            AddressOracle oracle = AddressOracle(deposits[i].oracle);
-            deposits[i].recipient = oracle.resolve(deposits[i].youtube_video_id);
+            Deposit storage dp = deposits[i];
+            AddressOracle oracle = AddressOracle(dp.oracle);
+            dp.recipient = oracle.resolve(dp.youtube_video_id);
         }
     }
 
     function dispatch_all_deposits() public {
         uint arrayLength = deposits.length;
         for (uint i=0; i<arrayLength; i++) {
-            Deposit memory dp = deposits[i];
+            Deposit storage dp = deposits[i];
             if (dp.recipient != address(0)) {
                 IERC20 token = IERC20(dp.token);
                 token.transfer(dp.recipient, dp.amount);
-                deposits[i].amount = 0;
+                dp.amount = 0;
             }
         }
     }
