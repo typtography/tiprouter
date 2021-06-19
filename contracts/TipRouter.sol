@@ -69,19 +69,16 @@ contract TipRouter {
     }
 
     function pop_empty_deposits() public {
-        uint arrayLength = deposits.length;
         uint i = 0;
-        uint j = arrayLength - 1;
-        while (i < j) {
-            if (deposits[i].amount != 0) {
+        while (i < deposits.length) {
+            if (deposits[deposits.length - 1].amount == 0) {
+                deposits.pop();
+            } else if (deposits[i].amount != 0) {
                 i++;
-            } else if (deposits[j].amount == 0) {
-                deposits.pop();
-                j--;
             } else {
-                deposits[i] = deposits[j];
+                deposits[i] = deposits[deposits.length - 1];
                 deposits.pop();
-                j--;
+                i++;
             }
         }
     }
