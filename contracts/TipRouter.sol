@@ -46,8 +46,7 @@ contract TipRouter {
     }
 
     function resolve_all_recipient_addresses() public {
-        uint arrayLength = deposits.length;
-        for (uint i=0; i<arrayLength; i++) {
+        for (uint i=0; i<deposits.length; i++) {
             Deposit storage dp = deposits[i];
             AddressOracle oracle = AddressOracle(dp.oracle);
             dp.recipient = oracle.resolve(dp.youtube_video_id);
@@ -55,8 +54,7 @@ contract TipRouter {
     }
 
     function dispatch_all_deposits() public {
-        uint arrayLength = deposits.length;
-        for (uint i=0; i<arrayLength; i++) {
+        for (uint i=0; i<deposits.length; i++) {
             Deposit storage dp = deposits[i];
             if (dp.recipient != address(0)) {
                 IERC20 token = IERC20(dp.token);
@@ -67,11 +65,7 @@ contract TipRouter {
     }
 
     function delete_all_deposits() public {
-        uint arrayLength = deposits.length;
-        while (arrayLength > 0) {
-            deposits.pop();
-            arrayLength--;
-        }
+        delete deposits;
     }
 
     function pop_empty_deposits() public {
