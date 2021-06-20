@@ -50,7 +50,7 @@ contract TipRouter {
             Deposit storage dp = deposits[i];
             if (dp.sender == msg.sender) {
                 IERC20 token = IERC20(dp.token);
-                token.transfer(msg.sender, dp.amount);
+                token.safeTransfer(msg.sender, dp.amount);
                 dp.amount = 0;
             }
         }
@@ -69,7 +69,7 @@ contract TipRouter {
             Deposit storage dp = deposits[i];
             if (dp.recipient != address(0)) {
                 IERC20 token = IERC20(dp.token);
-                token.transfer(dp.recipient, dp.amount);
+                token.safeTransfer(dp.recipient, dp.amount);
                 dp.amount = 0;
             }
         }
