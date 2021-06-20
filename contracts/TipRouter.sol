@@ -45,6 +45,17 @@ contract TipRouter {
         deposits.push(dp);
     }
 
+    function refund_all_outstanding_deposits() public {
+        for (uint i=0; i<deposits.length; i++) {
+            Deposit storage dp = deposits[i];
+            if (dp.sender == msg.sender) {
+                IERC20 token = IERC20(dp.token);
+                token.transfer(msg.sender, dp.amount);
+                dp.amount = 0;
+            }
+        }
+    }
+
     function resolve_all_recipient_addresses() public {
         for (uint i=0; i<deposits.length; i++) {
             Deposit storage dp = deposits[i];
