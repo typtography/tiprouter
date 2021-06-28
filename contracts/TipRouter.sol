@@ -82,8 +82,8 @@ contract TipRouter {
             Deposit storage dp = deposits[i];
             if (dp.recipient != address(0)) {
                 IERC20 token = IERC20(dp.token);
-                token.safeTransfer(dp.recipient, dp.amount);
                 dp.amount = 0;
+                token.safeTransfer(dp.recipient, dp.amount);
             }
         }
     }
