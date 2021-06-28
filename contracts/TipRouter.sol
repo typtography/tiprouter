@@ -32,6 +32,11 @@ contract TipRouter {
 
     Deposit[] public deposits;
 
+    event DepositReceived(Deposit);
+    event AddressResolved(address address_oracle, string youtube_video_id, address recipient);
+    event DepositPayedOut(Deposit);
+    event DepositRefunded(Deposit);
+
     function deposit(
         address _token,
         uint256 _amount,
