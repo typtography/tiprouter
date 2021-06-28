@@ -13,6 +13,14 @@ import "./AddressOracleInterface.sol";
 contract TipRouter {
     using SafeERC20 for IERC20;
 
+
+    enum State {
+        RECEIVED,
+        RESOLVED,
+        DISPATCHED,
+        REFUNDED
+    }
+
     struct Deposit {
         address token;
         uint256 amount;
