@@ -13,6 +13,20 @@ import "./AddressOracleInterface.sol";
 contract TipRouter {
     using SafeERC20 for IERC20;
 
+    enum RouterState {
+        OPEN,
+        CLOSED
+    }
+
+    RouterState public _routerState  = RouterState.CLOSED;
+
+    modifier routerOpen() {
+        require(
+            _routerState == RouterState.OPEN,
+            "Router is not open."
+        );
+        _;
+    }
 
     enum State {
         RECEIVED,
